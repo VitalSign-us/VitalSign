@@ -1,3 +1,24 @@
+
+# Work on this Documenso fork: rules for AI agents
+
+## Task sources
+- docs-internal/branding-runbook.md (branding), plus instructions in my prompt.
+
+## Git
+- Work on a branch (phi-safety/..., branding/..., sync/...). Never commit to main. Never merge pull requests.
+- Small commits, one per sub-step. Open a PR with `gh pr create` when a task is done.
+- Never commit secrets, real names or patient data.
+
+## Code rules
+- Change only user-visible text, brand values and the specific logic I ask for.
+- Never rename @documenso/* imports, the tailwind `documenso` colour key, CSS classes (documenso-branded, text-documenso-*), env var names or database fields.
+- Keep the LICENSE file and all copyright headers.
+- Images: copy from ../brand-assets/ over the existing files, keeping the same names.
+- After edits run `npm ci` once, then `npm run lint`, and fix errors.
+
+
+
+
 # Agent Guidelines for Documenso
 
 ## Build/Test/Lint Commands
