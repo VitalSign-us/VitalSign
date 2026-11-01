@@ -10,7 +10,6 @@ import { TemplateFooter } from '../template-components/template-footer';
 export type DocumentSelfSignedTemplateProps = TemplateDocumentSelfSignedProps;
 
 export const DocumentSelfSignedEmailTemplate = ({
-  documentName = 'Open Source Pledge.pdf',
   assetBaseUrl = 'http://localhost:3002',
 }: DocumentSelfSignedTemplateProps) => {
   const { _ } = useLingui();
@@ -28,7 +27,7 @@ export const DocumentSelfSignedEmailTemplate = ({
             <Section className="p-2">
               <TemplateBrandingLogo assetBaseUrl={assetBaseUrl} className="mb-4 h-6" />
 
-              <TemplateDocumentSelfSigned documentName={documentName} assetBaseUrl={assetBaseUrl} />
+              <TemplateDocumentSelfSigned documentName="" assetBaseUrl={assetBaseUrl} />
             </Section>
           </Container>
 

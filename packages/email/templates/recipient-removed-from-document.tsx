@@ -12,12 +12,11 @@ export type DocumentCancelEmailTemplateProps = Partial<TemplateDocumentCancelPro
 
 export const RecipientRemovedFromDocumentTemplate = ({
   inviterName = 'Lucas Smith',
-  documentName = 'Open Source Pledge.pdf',
   assetBaseUrl = 'http://localhost:3002',
 }: DocumentCancelEmailTemplateProps) => {
   const { _ } = useLingui();
 
-  const previewText = msg`${inviterName} has removed you from the document ${documentName}.`;
+  const previewText = msg`${inviterName} has removed you from a document.`;
 
   return (
     <Html>
@@ -35,10 +34,7 @@ export const RecipientRemovedFromDocumentTemplate = ({
 
               <Section>
                 <Text className="mx-auto mb-0 max-w-[80%] text-center font-semibold text-foreground text-lg">
-                  <Trans>
-                    {inviterName} has removed you from the document
-                    <br />"{documentName}"
-                  </Trans>
+                  <Trans>{inviterName} has removed you from a document</Trans>
                 </Text>
               </Section>
             </Section>

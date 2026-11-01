@@ -7,7 +7,6 @@ import { OrganisationType } from '@prisma/client';
 
 import { Body, Container, Head, Hr, Html, Link, Preview, Section, Text } from '../components';
 import { TemplateBrandingLogo } from '../template-components/template-branding-logo';
-import { TemplateCustomMessageBody } from '../template-components/template-custom-message-body';
 import type { TemplateDocumentInviteProps } from '../template-components/template-document-invite';
 import { TemplateDocumentInvite } from '../template-components/template-document-invite';
 import { TemplateFooter } from '../template-components/template-footer';
@@ -33,10 +32,8 @@ export type DocumentInviteEmailTemplateProps = Partial<TemplateDocumentInvitePro
 export const DocumentInviteEmailTemplate = ({
   inviterName = 'Lucas Smith',
   inviterEmail = 'lucas@documenso.com',
-  documentName = 'Open Source Pledge.pdf',
   signDocumentLink = 'https://documenso.com',
   assetBaseUrl = 'http://localhost:3002',
-  customBody,
   role,
   selfSigner = false,
   teamName = '',
@@ -49,16 +46,16 @@ export const DocumentInviteEmailTemplate = ({
 
   const action = _(RECIPIENT_ROLES_DESCRIPTION[role].actionVerb).toLowerCase();
 
-  let previewText = msg`${inviterName} has invited you to ${action} ${documentName}`;
+  let previewText = msg`${inviterName} has invited you to ${action} a document`;
 
   if (organisationType === OrganisationType.ORGANISATION) {
     previewText = includeSenderDetails
-      ? msg`${inviterName} on behalf of "${teamName}" has invited you to ${action} ${documentName}`
-      : msg`${teamName} has invited you to ${action} ${documentName}`;
+      ? msg`${inviterName} on behalf of "${teamName}" has invited you to ${action} a document`
+      : msg`${teamName} has invited you to ${action} a document`;
   }
 
   if (selfSigner) {
-    previewText = msg`Please ${action} your document ${documentName}`;
+    previewText = msg`You have a document to ${action}`;
   }
 
   return (
@@ -80,7 +77,7 @@ export const DocumentInviteEmailTemplate = ({
               <TemplateDocumentInvite
                 inviterName={inviterName}
                 inviterEmail={inviterEmail}
-                documentName={documentName}
+                documentName=""
                 signDocumentLink={signDocumentLink}
                 assetBaseUrl={assetBaseUrl}
                 role={role}
@@ -106,11 +103,11 @@ export const DocumentInviteEmailTemplate = ({
               )}
 
               <Text className="mt-2 text-base text-muted-foreground">
-                {customBody ? (
-                  <TemplateCustomMessageBody text={customBody} />
+                {selfSigner ? (
+                  <Trans>You have a document to {action}.</Trans>
                 ) : (
                   <Trans>
-                    {inviterName} has invited you to {action} the document "{documentName}".
+                    {inviterName} has invited you to {action} a document.
                   </Trans>
                 )}
               </Text>

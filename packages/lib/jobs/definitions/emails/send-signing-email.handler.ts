@@ -23,7 +23,6 @@ import { DOCUMENT_AUDIT_LOG_TYPE } from '../../../types/document-audit-logs';
 import { extractDerivedDocumentEmailSettings } from '../../../types/document-email';
 import { createDocumentAuditLogData } from '../../../utils/document-audit-logs';
 import { unsafeBuildEnvelopeIdQuery } from '../../../utils/envelope';
-import { renderCustomEmailTemplate } from '../../../utils/render-custom-email-template';
 import { renderEmailWithI18N } from '../../../utils/render-email-with-i18n';
 import { shouldShowNewAccountWarning } from '../../../utils/sender-trust';
 import type { JobRunIO } from '../../client/_internal/job';
@@ -77,7 +76,7 @@ export const run = async ({ payload, io }: { payload: TSendSigningEmailJobDefini
     }),
   ]);
 
-  const { documentMeta, team } = envelope;
+  const { team } = envelope;
 
   if (recipient.role === RecipientRole.CC) {
     return;
@@ -116,55 +115,30 @@ export const run = async ({ payload, io }: { payload: TSendSigningEmailJobDefini
     return;
   }
 
-  const customEmail = envelope?.documentMeta;
   const isDirectTemplate = envelope.source === DocumentSource.TEMPLATE_DIRECT_LINK;
 
   const recipientEmailType = RECIPIENT_ROLE_TO_EMAIL_TYPE[recipient.role];
 
-  const { email, name } = recipient;
+  const { email } = recipient;
   const selfSigner = email === user.email;
 
   const i18n = await getI18nInstance(emailLanguage);
 
   const recipientActionVerb = i18n._(RECIPIENT_ROLES_DESCRIPTION[recipient.role].actionVerb).toLowerCase();
 
-  let emailMessage = customEmail?.message || '';
   let emailSubject = i18n._(msg`Please ${recipientActionVerb} this document`);
 
   if (selfSigner) {
-    emailMessage = i18n._(
-      msg`You have initiated the document ${`"${envelope.title}"`} that requires you to ${recipientActionVerb} it.`,
-    );
     emailSubject = i18n._(msg`Please ${recipientActionVerb} your document`);
   }
 
   if (isDirectTemplate) {
-    emailMessage = i18n._(
-      msg`A document was created by your direct template that requires you to ${recipientActionVerb} it.`,
-    );
     emailSubject = i18n._(msg`Please ${recipientActionVerb} this document created by your direct template`);
   }
 
   if (organisationType === OrganisationType.ORGANISATION) {
     emailSubject = i18n._(msg`${team.name} invited you to ${recipientActionVerb} a document`);
-    emailMessage = customEmail?.message ?? '';
-
-    if (!emailMessage) {
-      const inviterName = user.name || '';
-
-      emailMessage = i18n._(
-        settings.includeSenderDetails
-          ? msg`${inviterName} on behalf of "${team.name}" has invited you to ${recipientActionVerb} the document "${envelope.title}".`
-          : msg`${team.name} has invited you to ${recipientActionVerb} the document "${envelope.title}".`,
-      );
-    }
   }
-
-  const customEmailTemplate = {
-    'signer.name': name,
-    'signer.email': email,
-    'document.name': envelope.title,
-  };
 
   const assetBaseUrl = NEXT_PUBLIC_WEBAPP_URL() || 'http://localhost:3000';
   const signDocumentLink = `${NEXT_PUBLIC_WEBAPP_URL()}/sign/${recipient.token}`;
@@ -178,13 +152,11 @@ export const run = async ({ payload, io }: { payload: TSendSigningEmailJobDefini
     });
 
   const template = createElement(DocumentInviteEmailTemplate, {
-    documentName: envelope.title,
     inviterName: user.name || undefined,
     inviterEmail:
       organisationType === OrganisationType.ORGANISATION ? team?.teamEmail?.email || user.email : user.email,
     assetBaseUrl,
     signDocumentLink,
-    customBody: renderCustomEmailTemplate(emailMessage, customEmailTemplate),
     role: recipient.role,
     selfSigner,
     organisationType,
@@ -232,7 +204,7 @@ export const run = async ({ payload, io }: { payload: TSendSigningEmailJobDefini
         },
         from: senderEmail,
         replyTo: replyToEmail,
-        subject: renderCustomEmailTemplate(documentMeta?.subject || emailSubject, customEmailTemplate),
+        subject: emailSubject,
         html,
         text,
         headers: buildEnvelopeEmailHeaders({

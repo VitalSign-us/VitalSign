@@ -10,7 +10,6 @@ export interface TemplateDocumentRejectedProps {
 }
 
 export function TemplateDocumentRejected({
-  documentName,
   recipientName: signerName,
   rejectionReason,
   documentUrl,
@@ -22,9 +21,7 @@ export function TemplateDocumentRejected({
       </Heading>
 
       <Text className="mb-4 text-base">
-        <Trans>
-          {signerName} has rejected the document "{documentName}".
-        </Trans>
+        <Trans>{signerName} has rejected a document.</Trans>
       </Text>
 
       {rejectionReason && (

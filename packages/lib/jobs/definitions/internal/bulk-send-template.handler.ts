@@ -161,7 +161,7 @@ export const run = async ({ payload, io }: { payload: TBulkSendTemplateJobDefini
         address: user.email,
       },
       from: senderEmail,
-      subject: i18n._(msg`Bulk Send Complete: ${template.title}`),
+      subject: i18n._(msg`Bulk send complete`),
       html,
       text,
     });

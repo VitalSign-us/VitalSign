@@ -10,7 +10,7 @@ export interface TemplateDocumentSelfSignedProps {
   assetBaseUrl: string;
 }
 
-export const TemplateDocumentSelfSigned = ({ documentName, assetBaseUrl }: TemplateDocumentSelfSignedProps) => {
+export const TemplateDocumentSelfSigned = ({ assetBaseUrl }: TemplateDocumentSelfSignedProps) => {
   const NEXT_PUBLIC_WEBAPP_URL = env('NEXT_PUBLIC_WEBAPP_URL');
 
   const signUpUrl = `${NEXT_PUBLIC_WEBAPP_URL ?? 'http://localhost:3000'}/signup`;
@@ -34,7 +34,7 @@ export const TemplateDocumentSelfSigned = ({ documentName, assetBaseUrl }: Templ
         </Section>
 
         <Text className="mt-6 mb-0 text-center font-semibold text-foreground text-lg">
-          <Trans>You have signed “{documentName}”</Trans>
+          <Trans>You have signed a document</Trans>
         </Text>
 
         <Text className="mx-auto mt-1 mb-6 max-w-[80%] text-center text-base text-muted-foreground">

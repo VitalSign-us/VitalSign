@@ -11,12 +11,7 @@ export interface TemplateDocumentCompletedProps {
   customBody?: string;
 }
 
-export const TemplateDocumentCompleted = ({
-  downloadLink,
-  documentName,
-  assetBaseUrl,
-  customBody,
-}: TemplateDocumentCompletedProps) => {
+export const TemplateDocumentCompleted = ({ downloadLink, assetBaseUrl }: TemplateDocumentCompletedProps) => {
   return (
     <>
       <TemplateDocumentImage className="mt-6" assetBaseUrl={assetBaseUrl} />
@@ -36,7 +31,7 @@ export const TemplateDocumentCompleted = ({
         </Section>
 
         <Text className="mb-0 text-center font-semibold text-foreground text-lg">
-          {customBody || <Trans>“{documentName}” was signed by all signers</Trans>}
+          <Trans>A document was signed by all signers</Trans>
         </Text>
 
         <Text className="my-1 text-center text-base text-muted-foreground">

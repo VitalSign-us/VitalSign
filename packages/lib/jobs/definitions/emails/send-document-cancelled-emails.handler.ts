@@ -149,7 +149,7 @@ export const run = async ({ payload, io }: { payload: TSendDocumentCancelledEmai
           },
           from: senderEmail,
           replyTo: replyToEmail,
-          subject: i18n._(msg`Document "${envelope.title}" Cancelled`),
+          subject: i18n._(msg`Document cancelled`),
           html,
           text,
         });

@@ -24,7 +24,6 @@ import { DOCUMENT_AUDIT_LOG_TYPE, DOCUMENT_EMAIL_TYPE } from '../../../types/doc
 import { extractDerivedDocumentEmailSettings } from '../../../types/document-email';
 import { mapEnvelopeToWebhookDocumentPayload, ZWebhookDocumentSchema } from '../../../types/webhook-payload';
 import { createDocumentAuditLogData } from '../../../utils/document-audit-logs';
-import { renderCustomEmailTemplate } from '../../../utils/render-custom-email-template';
 import { renderEmailWithI18N } from '../../../utils/render-email-with-i18n';
 import { shouldShowNewAccountWarning } from '../../../utils/sender-trust';
 import type { JobRunIO } from '../../client/_internal/job';
@@ -133,28 +132,11 @@ export const run = async ({ payload, io }: { payload: TProcessSigningReminderJob
 
   const recipientActionVerb = i18n._(RECIPIENT_ROLES_DESCRIPTION[recipient.role].actionVerb).toLowerCase();
 
-  let emailSubject = i18n._(msg`Reminder: Please ${recipientActionVerb} the document "${envelope.title}"`);
+  let emailSubject = i18n._(msg`Reminder: Please ${recipientActionVerb} a document`);
 
   if (organisationType === OrganisationType.ORGANISATION) {
     emailSubject = i18n._(msg`Reminder: ${envelope.team.name} invited you to ${recipientActionVerb} a document`);
   }
-
-  const customEmailTemplate = {
-    'signer.name': recipient.name,
-    'signer.email': recipient.email,
-    'document.name': envelope.title,
-  };
-
-  if (envelope.documentMeta.subject) {
-    emailSubject = renderCustomEmailTemplate(
-      i18n._(msg`Reminder: ${envelope.documentMeta.subject}`),
-      customEmailTemplate,
-    );
-  }
-
-  const emailMessage = envelope.documentMeta.message
-    ? renderCustomEmailTemplate(envelope.documentMeta.message, customEmailTemplate)
-    : undefined;
 
   const assetBaseUrl = NEXT_PUBLIC_WEBAPP_URL() || 'http://localhost:3000';
   const signDocumentLink = `${NEXT_PUBLIC_WEBAPP_URL()}/sign/${recipient.token}`;
@@ -195,10 +177,8 @@ export const run = async ({ payload, io }: { payload: TProcessSigningReminderJob
 
     const template = createElement(DocumentReminderEmailTemplate, {
       recipientName: recipient.name,
-      documentName: envelope.title,
       assetBaseUrl,
       signDocumentLink,
-      customBody: emailMessage,
       role: recipient.role,
       reportUrl,
       newAccountWarningSenderEmail: showNewAccountWarning ? envelope.user.email : undefined,

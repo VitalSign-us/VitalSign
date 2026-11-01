@@ -17,7 +17,6 @@ export interface TemplateDocumentReminderProps {
 
 export const TemplateDocumentReminder = ({
   recipientName,
-  documentName,
   signDocumentLink,
   assetBaseUrl,
   role,
@@ -32,10 +31,7 @@ export const TemplateDocumentReminder = ({
 
       <Section>
         <Text className="mx-auto mb-0 max-w-[80%] text-center font-semibold text-foreground text-lg">
-          <Trans>
-            Reminder: Please {_(actionVerb).toLowerCase()} your document
-            <br />"{documentName}"
-          </Trans>
+          <Trans>Reminder: Please {_(actionVerb).toLowerCase()} your document</Trans>
         </Text>
 
         <Text className="my-1 text-center text-base text-muted-foreground">

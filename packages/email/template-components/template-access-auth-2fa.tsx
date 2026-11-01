@@ -13,7 +13,6 @@ export type TemplateAccessAuth2FAProps = {
 };
 
 export const TemplateAccessAuth2FA = ({
-  documentTitle,
   code,
   userName,
   expiresInMinutes,
@@ -29,9 +28,7 @@ export const TemplateAccessAuth2FA = ({
         </Heading>
 
         <Text className="mt-2 text-center text-foreground">
-          <Trans>
-            Hi {userName}, you need to enter a verification code to complete the document "{documentTitle}".
-          </Trans>
+          <Trans>Hi {userName}, you need to enter a verification code to complete a document.</Trans>
         </Text>
 
         <Section className="mt-6 rounded-lg bg-muted p-6 text-center">

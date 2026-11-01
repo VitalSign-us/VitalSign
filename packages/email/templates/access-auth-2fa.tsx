@@ -16,7 +16,6 @@ export type AccessAuth2FAEmailTemplateProps = {
 };
 
 export const AccessAuth2FAEmailTemplate = ({
-  documentTitle,
   code,
   userEmail,
   userName,
@@ -40,7 +39,7 @@ export const AccessAuth2FAEmailTemplate = ({
               <TemplateBrandingLogo assetBaseUrl={assetBaseUrl} className="mb-4 h-6" />
 
               <TemplateAccessAuth2FA
-                documentTitle={documentTitle}
+                documentTitle=""
                 code={code}
                 userEmail={userEmail}
                 userName={userName}

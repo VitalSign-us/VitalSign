@@ -12,7 +12,6 @@ export interface TemplateDocumentRecipientSignedProps {
 }
 
 export const TemplateDocumentRecipientSigned = ({
-  documentName,
   recipientName,
   recipientEmail,
   assetBaseUrl,
@@ -38,9 +37,7 @@ export const TemplateDocumentRecipientSigned = ({
         </Section>
 
         <Text className="mb-0 text-center font-semibold text-foreground text-lg">
-          <Trans>
-            {recipientReference} has signed "{documentName}"
-          </Trans>
+          <Trans>{recipientReference} has signed a document</Trans>
         </Text>
 
         <Text className="mx-auto mt-1 mb-6 max-w-[80%] text-center text-base text-muted-foreground">

@@ -9,7 +9,7 @@ export interface TemplateDocumentDeleteProps {
   assetBaseUrl: string;
 }
 
-export const TemplateDocumentDelete = ({ reason, documentName, assetBaseUrl }: TemplateDocumentDeleteProps) => {
+export const TemplateDocumentDelete = ({ reason, assetBaseUrl }: TemplateDocumentDeleteProps) => {
   return (
     <>
       <TemplateDocumentImage className="mt-6" assetBaseUrl={assetBaseUrl} />
@@ -20,7 +20,7 @@ export const TemplateDocumentDelete = ({ reason, documentName, assetBaseUrl }: T
         </Text>
 
         <Text className="mx-auto mt-1 mb-6 text-left text-base text-muted-foreground">
-          <Trans>"{documentName}" has been deleted by an admin.</Trans>
+          <Trans>A document has been deleted by an admin.</Trans>
         </Text>
 
         <Text className="mx-auto mt-1 mb-6 text-left text-base text-muted-foreground">
