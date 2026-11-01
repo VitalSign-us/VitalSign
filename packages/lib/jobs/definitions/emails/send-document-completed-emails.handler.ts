@@ -1,7 +1,7 @@
 import { DocumentCompletedEmailTemplate } from '@documenso/email/templates/document-completed';
 import { prisma } from '@documenso/prisma';
 import { msg } from '@lingui/core/macro';
-import { DocumentSource, EnvelopeType, RecipientRole } from '@prisma/client';
+import { EnvelopeType, RecipientRole } from '@prisma/client';
 import { createElement } from 'react';
 
 import { getI18nInstance } from '../../../client-only/providers/i18n-server';
@@ -10,11 +10,9 @@ import { getEmailContext } from '../../../server-only/email/get-email-context';
 import { assertOrganisationRatesAndLimits } from '../../../server-only/rate-limit/assert-organisation-rates-and-limits';
 import { DOCUMENT_AUDIT_LOG_TYPE } from '../../../types/document-audit-logs';
 import { extractDerivedDocumentEmailSettings } from '../../../types/document-email';
-import { getFileServerSide } from '../../../universal/upload/get-file.server';
 import { createDocumentAuditLogData } from '../../../utils/document-audit-logs';
 import { unsafeBuildEnvelopeIdQuery } from '../../../utils/envelope';
 import { isRecipientEmailValidForSending } from '../../../utils/recipients';
-import { renderCustomEmailTemplate } from '../../../utils/render-custom-email-template';
 import { renderEmailWithI18N } from '../../../utils/render-email-with-i18n';
 import { formatDocumentsPath } from '../../../utils/teams';
 import type { JobRunIO } from '../../client/_internal/job';
@@ -26,17 +24,6 @@ export const run = async ({ payload, io }: { payload: TSendDocumentCompletedEmai
   const envelope = await prisma.envelope.findUnique({
     where: unsafeBuildEnvelopeIdQuery({ type: 'envelopeId', id: envelopeId }, EnvelopeType.DOCUMENT),
     include: {
-      envelopeItems: {
-        include: {
-          documentData: {
-            select: {
-              type: true,
-              id: true,
-              data: true,
-            },
-          },
-        },
-      },
       documentMeta: true,
       recipients: true,
       user: {
@@ -60,8 +47,6 @@ export const run = async ({ payload, io }: { payload: TSendDocumentCompletedEmai
     throw new Error('Document not found');
   }
 
-  const isDirectTemplate = envelope?.source === DocumentSource.TEMPLATE_DIRECT_LINK;
-
   if (envelope.recipients.length === 0) {
     throw new Error('Document has no recipients');
   }
@@ -82,21 +67,6 @@ export const run = async ({ payload, io }: { payload: TSendDocumentCompletedEmai
   }
 
   const { user: owner } = envelope;
-
-  const completedDocumentEmailAttachments = await Promise.all(
-    envelope.envelopeItems.map(async (envelopeItem) => {
-      const file = await getFileServerSide(envelopeItem.documentData);
-
-      // Use the envelope title for version 1, and the envelope item title for version 2.
-      const fileNameToUse = envelope.internalVersion === 1 ? envelope.title : envelopeItem.title + '.pdf';
-
-      return {
-        filename: fileNameToUse.endsWith('.pdf') ? fileNameToUse : fileNameToUse + '.pdf',
-        content: Buffer.from(file),
-        contentType: 'application/pdf',
-      };
-    }),
-  );
 
   const assetBaseUrl = NEXT_PUBLIC_WEBAPP_URL() || 'http://localhost:3000';
 
@@ -122,7 +92,6 @@ export const run = async ({ payload, io }: { payload: TSendDocumentCompletedEmai
     (!envelope.recipients.find((recipient) => recipient.email === owner.email) || !isDocumentCompletedEmailEnabled)
   ) {
     const template = createElement(DocumentCompletedEmailTemplate, {
-      documentName: envelope.title,
       assetBaseUrl,
       downloadLink: documentOwnerDownloadLink,
     });
@@ -150,7 +119,6 @@ export const run = async ({ payload, io }: { payload: TSendDocumentCompletedEmai
       subject: i18n._(msg`Signing Complete!`),
       html,
       text,
-      attachments: completedDocumentEmailAttachments,
     });
 
     await prisma.documentAuditLog.create({
@@ -203,24 +171,13 @@ export const run = async ({ payload, io }: { payload: TSendDocumentCompletedEmai
         }
       }
 
-      const customEmailTemplate = {
-        'signer.name': recipient.name,
-        'signer.email': recipient.email,
-        'document.name': envelope.title,
-      };
-
       const downloadLink = `${NEXT_PUBLIC_WEBAPP_URL()}/sign/${recipient.token}/complete`;
       const reportUrl =
         recipient.role === RecipientRole.CC ? `${NEXT_PUBLIC_WEBAPP_URL()}/report/${recipient.token}` : undefined;
 
       const template = createElement(DocumentCompletedEmailTemplate, {
-        documentName: envelope.title,
         assetBaseUrl,
         downloadLink: recipient.email === owner.email ? documentOwnerDownloadLink : downloadLink,
-        customBody:
-          isDirectTemplate && envelope.documentMeta?.message
-            ? renderCustomEmailTemplate(envelope.documentMeta.message, customEmailTemplate)
-            : undefined,
         reportUrl,
       });
 
@@ -244,13 +201,9 @@ export const run = async ({ payload, io }: { payload: TSendDocumentCompletedEmai
         ],
         from: senderEmail,
         replyTo: replyToEmail,
-        subject:
-          isDirectTemplate && envelope.documentMeta?.subject
-            ? renderCustomEmailTemplate(envelope.documentMeta.subject, customEmailTemplate)
-            : i18n._(msg`Signing Complete!`),
+        subject: i18n._(msg`Signing Complete!`),
         html,
         text,
-        attachments: completedDocumentEmailAttachments,
       });
 
       await prisma.documentAuditLog.create({

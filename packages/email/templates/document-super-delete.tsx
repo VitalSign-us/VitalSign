@@ -12,13 +12,12 @@ import { TemplateFooter } from '../template-components/template-footer';
 export type DocumentDeleteEmailTemplateProps = Partial<TemplateDocumentDeleteProps>;
 
 export const DocumentSuperDeleteEmailTemplate = ({
-  documentName = 'Open Source Pledge.pdf',
   assetBaseUrl = 'http://localhost:3002',
   reason = 'Unknown',
 }: DocumentDeleteEmailTemplateProps) => {
   const { _ } = useLingui();
 
-  const previewText = msg`An admin has deleted your document "${documentName}".`;
+  const previewText = msg`An admin has deleted your document.`;
 
   return (
     <Html>
@@ -32,7 +31,7 @@ export const DocumentSuperDeleteEmailTemplate = ({
             <Section>
               <TemplateBrandingLogo assetBaseUrl={assetBaseUrl} className="mb-4 h-6" />
 
-              <TemplateDocumentDelete reason={reason} documentName={documentName} assetBaseUrl={assetBaseUrl} />
+              <TemplateDocumentDelete reason={reason} documentName="" assetBaseUrl={assetBaseUrl} />
             </Section>
           </Container>
 

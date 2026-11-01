@@ -9,7 +9,7 @@ export interface TemplateDocumentPendingProps {
   assetBaseUrl: string;
 }
 
-export const TemplateDocumentPending = ({ documentName, assetBaseUrl }: TemplateDocumentPendingProps) => {
+export const TemplateDocumentPending = ({ assetBaseUrl }: TemplateDocumentPendingProps) => {
   return (
     <>
       <TemplateDocumentImage className="mt-6" assetBaseUrl={assetBaseUrl} />
@@ -29,7 +29,7 @@ export const TemplateDocumentPending = ({ documentName, assetBaseUrl }: Template
         </Section>
 
         <Text className="mb-0 text-center font-semibold text-foreground text-lg">
-          <Trans>“{documentName}” has been signed</Trans>
+          <Trans>A document has been signed</Trans>
         </Text>
 
         <Text className="mx-auto mt-1 mb-6 max-w-[80%] text-center text-base text-muted-foreground">

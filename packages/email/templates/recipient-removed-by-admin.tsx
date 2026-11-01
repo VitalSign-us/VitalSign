@@ -13,7 +13,6 @@ export type RecipientRemovedByAdminEmailTemplateProps = Partial<TemplateRecipien
 
 export const RecipientRemovedByAdminEmailTemplate = ({
   audience = 'recipient',
-  documentName = 'Open Source Pledge.pdf',
   recipientName = 'Lucas Smith',
   recipientEmail = 'lucas@documenso.com',
   assetBaseUrl = 'http://localhost:3002',
@@ -22,8 +21,8 @@ export const RecipientRemovedByAdminEmailTemplate = ({
 
   const previewText =
     audience === 'recipient'
-      ? msg`You have been removed from the document "${documentName}" by an administrator.`
-      : msg`${recipientName} has been removed from the document "${documentName}" by an administrator.`;
+      ? msg`You have been removed from a document by an administrator.`
+      : msg`${recipientName} has been removed from a document by an administrator.`;
 
   return (
     <Html>
@@ -39,7 +38,7 @@ export const RecipientRemovedByAdminEmailTemplate = ({
 
               <TemplateRecipientRemovedByAdmin
                 audience={audience}
-                documentName={documentName}
+                documentName=""
                 recipientName={recipientName}
                 recipientEmail={recipientEmail}
                 assetBaseUrl={assetBaseUrl}

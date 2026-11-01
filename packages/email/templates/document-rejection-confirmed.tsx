@@ -15,15 +15,13 @@ export type DocumentRejectionConfirmedEmailProps = {
 };
 
 export function DocumentRejectionConfirmedEmail({
-  recipientName,
-  documentName,
   documentOwnerName,
   reason,
   assetBaseUrl = 'http://localhost:3002',
 }: DocumentRejectionConfirmedEmailProps) {
   const { _ } = useLingui();
 
-  const previewText = _(msg`You have rejected the document '${documentName}'`);
+  const previewText = _(msg`You have rejected a document`);
 
   return (
     <Html>
@@ -38,8 +36,8 @@ export function DocumentRejectionConfirmedEmail({
               <TemplateBrandingLogo assetBaseUrl={assetBaseUrl} className="mb-4 h-6" />
 
               <TemplateDocumentRejectionConfirmed
-                recipientName={recipientName}
-                documentName={documentName}
+                recipientName=""
+                documentName=""
                 documentOwnerName={documentOwnerName}
                 reason={reason}
               />

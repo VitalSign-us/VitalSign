@@ -10,7 +10,6 @@ import { TemplateRecipientExpired } from '../template-components/template-recipi
 export type RecipientExpiredEmailTemplateProps = Partial<TemplateRecipientExpiredProps>;
 
 export const RecipientExpiredTemplate = ({
-  documentName = 'Open Source Pledge.pdf',
   recipientName = 'John Doe',
   recipientEmail = 'john@example.com',
   documentLink = 'https://documenso.com',
@@ -18,7 +17,7 @@ export const RecipientExpiredTemplate = ({
 }: RecipientExpiredEmailTemplateProps) => {
   const { _ } = useLingui();
 
-  const previewText = msg`The signing window for "${recipientName}" on document "${documentName}" has expired.`;
+  const previewText = msg`The signing window for "${recipientName}" has expired.`;
 
   return (
     <Html>
@@ -33,7 +32,7 @@ export const RecipientExpiredTemplate = ({
               <TemplateBrandingLogo assetBaseUrl={assetBaseUrl} className="mb-4 h-6" />
 
               <TemplateRecipientExpired
-                documentName={documentName}
+                documentName=""
                 recipientName={recipientName}
                 recipientEmail={recipientEmail}
                 documentLink={documentLink}

@@ -13,7 +13,6 @@ export interface TemplateDocumentCancelProps {
 
 export const TemplateDocumentCancel = ({
   inviterName,
-  documentName,
   assetBaseUrl,
   cancellationReason,
 }: TemplateDocumentCancelProps) => {
@@ -23,10 +22,7 @@ export const TemplateDocumentCancel = ({
 
       <Section>
         <Text className="mx-auto mb-0 max-w-[80%] text-center font-semibold text-foreground text-lg">
-          <Trans>
-            {inviterName} has cancelled the document
-            <br />"{documentName}"
-          </Trans>
+          <Trans>{inviterName} has cancelled a document</Trans>
         </Text>
 
         <Text className="my-1 text-center text-base text-muted-foreground">

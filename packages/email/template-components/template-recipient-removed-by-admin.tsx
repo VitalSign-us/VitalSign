@@ -15,7 +15,6 @@ export type TemplateRecipientRemovedByAdminProps = {
 
 export const TemplateRecipientRemovedByAdmin = ({
   audience,
-  documentName,
   recipientName,
   recipientEmail,
   assetBaseUrl,
@@ -39,13 +38,13 @@ export const TemplateRecipientRemovedByAdmin = ({
         <Text className="mx-auto mt-1 mb-6 text-left text-base text-muted-foreground">
           {audience === 'recipient' ? (
             <Trans>
-              You have been removed from the document "{documentName}" by an administrator, typically at the request of
-              the document sender.
+              You have been removed from a document by an administrator, typically at the request of the document
+              sender.
             </Trans>
           ) : (
             <Trans>
-              {recipientLabel} has been removed from the document "{documentName}" by an administrator, typically at the
-              request of the document sender.
+              {recipientLabel} has been removed from a document by an administrator, typically at the request of the
+              document sender.
             </Trans>
           )}
         </Text>

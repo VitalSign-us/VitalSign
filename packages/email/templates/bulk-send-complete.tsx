@@ -16,7 +16,6 @@ export interface BulkSendCompleteEmailProps {
 
 export const BulkSendCompleteEmail = ({
   userName,
-  templateName,
   totalProcessed,
   successCount,
   failedCount,
@@ -24,7 +23,7 @@ export const BulkSendCompleteEmail = ({
 }: BulkSendCompleteEmailProps) => {
   const { _ } = useLingui();
 
-  const previewText = msg`Bulk send operation complete for template "${templateName}"`;
+  const previewText = msg`Bulk send operation complete`;
 
   return (
     <Html>
@@ -40,7 +39,7 @@ export const BulkSendCompleteEmail = ({
               </Text>
 
               <Text className="text-sm">
-                <Trans>Your bulk send operation for template "{templateName}" has completed.</Trans>
+                <Trans>Your bulk send operation has completed.</Trans>
               </Text>
 
               <Text className="font-semibold text-lg">

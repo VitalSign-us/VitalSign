@@ -22,7 +22,6 @@ export interface TemplateDocumentInviteProps {
 
 export const TemplateDocumentInvite = ({
   inviterName,
-  documentName,
   signDocumentLink,
   assetBaseUrl,
   role,
@@ -42,12 +41,7 @@ export const TemplateDocumentInvite = ({
       <Section>
         <Text className="mx-auto mb-0 max-w-[80%] text-center font-semibold text-foreground text-lg">
           {match({ selfSigner, organisationType, includeSenderDetails, teamName })
-            .with({ selfSigner: true }, () => (
-              <Trans>
-                Please {_(actionVerb).toLowerCase()} your document
-                <br />"{documentName}"
-              </Trans>
-            ))
+            .with({ selfSigner: true }, () => <Trans>Please {_(actionVerb).toLowerCase()} your document</Trans>)
             .with(
               {
                 organisationType: OrganisationType.ORGANISATION,
@@ -56,21 +50,18 @@ export const TemplateDocumentInvite = ({
               },
               () => (
                 <Trans>
-                  {inviterName} on behalf of "{teamName}" has invited you to {_(actionVerb).toLowerCase()}
-                  <br />"{documentName}"
+                  {inviterName} on behalf of "{teamName}" has invited you to {_(actionVerb).toLowerCase()} a document
                 </Trans>
               ),
             )
             .with({ organisationType: OrganisationType.ORGANISATION, teamName: P.string }, () => (
               <Trans>
-                {teamName} has invited you to {_(actionVerb).toLowerCase()}
-                <br />"{documentName}"
+                {teamName} has invited you to {_(actionVerb).toLowerCase()} a document
               </Trans>
             ))
             .otherwise(() => (
               <Trans>
-                {inviterName} has invited you to {_(actionVerb).toLowerCase()}
-                <br />"{documentName}"
+                {inviterName} has invited you to {_(actionVerb).toLowerCase()} a document
               </Trans>
             ))}
         </Text>

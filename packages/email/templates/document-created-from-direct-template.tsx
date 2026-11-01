@@ -21,7 +21,6 @@ export const DocumentCreatedFromDirectTemplateEmailTemplate = ({
   recipientName = 'John Doe',
   recipientRole = RecipientRole.SIGNER,
   documentLink = 'http://localhost:3000',
-  documentName = 'Open Source Pledge.pdf',
   assetBaseUrl = 'http://localhost:3002',
 }: DocumentCompletedEmailTemplateProps) => {
   const { _ } = useLingui();
@@ -49,10 +48,6 @@ export const DocumentCreatedFromDirectTemplateEmailTemplate = ({
                     {recipientName} {action} a document by using one of your direct links
                   </Trans>
                 </Text>
-
-                <div className="mx-auto my-2 w-fit rounded-lg bg-muted px-4 py-2 text-muted-foreground text-sm">
-                  {documentName}
-                </div>
 
                 <Section className="my-6 text-center">
                   <Button

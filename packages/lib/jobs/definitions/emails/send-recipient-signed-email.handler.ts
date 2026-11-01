@@ -110,7 +110,7 @@ export const run = async ({ payload, io }: { payload: TSendRecipientSignedEmailJ
         address: owner.email,
       },
       from: senderEmail,
-      subject: i18n._(msg`${recipientReference} has signed "${envelope.title}"`),
+      subject: i18n._(msg`${recipientReference} has signed a document`),
       html,
       text,
     });

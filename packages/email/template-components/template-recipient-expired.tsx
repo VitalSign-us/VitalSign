@@ -12,7 +12,6 @@ export type TemplateRecipientExpiredProps = {
 };
 
 export const TemplateRecipientExpired = ({
-  documentName,
   recipientName,
   recipientEmail,
   documentLink,
@@ -26,15 +25,13 @@ export const TemplateRecipientExpired = ({
 
       <Section>
         <Text className="mx-auto mb-0 max-w-[80%] text-center font-semibold text-foreground text-lg">
-          <Trans>
-            Signing window expired for "{displayName}" on "{documentName}"
-          </Trans>
+          <Trans>Signing window expired for "{displayName}"</Trans>
         </Text>
 
         <Text className="my-1 text-center text-base text-muted-foreground">
           <Trans>
-            The signing window for {displayName} on document "{documentName}" has expired. You can resend the document
-            to extend their deadline or cancel the document.
+            The signing window for {displayName} has expired. You can resend the document to extend their deadline or
+            cancel the document.
           </Trans>
         </Text>
 

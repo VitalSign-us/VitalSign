@@ -10,7 +10,6 @@ import { TemplateFooter } from '../template-components/template-footer';
 export type DocumentPendingEmailTemplateProps = Partial<TemplateDocumentPendingProps>;
 
 export const DocumentPendingEmailTemplate = ({
-  documentName = 'Open Source Pledge.pdf',
   assetBaseUrl = 'http://localhost:3002',
 }: DocumentPendingEmailTemplateProps) => {
   const { _ } = useLingui();
@@ -28,7 +27,7 @@ export const DocumentPendingEmailTemplate = ({
             <Section>
               <TemplateBrandingLogo assetBaseUrl={assetBaseUrl} className="mb-4 h-6" />
 
-              <TemplateDocumentPending documentName={documentName} assetBaseUrl={assetBaseUrl} />
+              <TemplateDocumentPending documentName="" assetBaseUrl={assetBaseUrl} />
             </Section>
           </Container>
 

@@ -16,14 +16,13 @@ type DocumentRejectedEmailProps = {
 
 export function DocumentRejectedEmail({
   recipientName,
-  documentName,
   documentUrl,
   rejectionReason,
   assetBaseUrl = 'http://localhost:3002',
 }: DocumentRejectedEmailProps) {
   const { _ } = useLingui();
 
-  const previewText = _(msg`${recipientName} has rejected the document '${documentName}'`);
+  const previewText = _(msg`${recipientName} has rejected a document`);
 
   return (
     <Html>
@@ -39,7 +38,7 @@ export function DocumentRejectedEmail({
 
               <TemplateDocumentRejected
                 recipientName={recipientName}
-                documentName={documentName}
+                documentName=""
                 documentUrl={documentUrl}
                 rejectionReason={rejectionReason}
               />

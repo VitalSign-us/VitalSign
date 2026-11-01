@@ -103,7 +103,7 @@ export const run = async ({ payload, io }: { payload: TSendOwnerRecipientExpired
         address: documentOwner.email,
       },
       from: senderEmail,
-      subject: i18n._(msg`Signing window expired for "${recipient.name || recipient.email}" on "${envelope.title}"`),
+      subject: i18n._(msg`Signing window expired for "${recipient.name || recipient.email}"`),
       html,
       text,
     });

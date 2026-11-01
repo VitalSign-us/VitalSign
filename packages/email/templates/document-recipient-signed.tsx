@@ -14,7 +14,6 @@ export interface DocumentRecipientSignedEmailTemplateProps {
 }
 
 export const DocumentRecipientSignedEmailTemplate = ({
-  documentName = 'Open Source Pledge.pdf',
   recipientName = 'John Doe',
   recipientEmail = 'lucas@documenso.com',
   assetBaseUrl = 'http://localhost:3002',
@@ -23,7 +22,7 @@ export const DocumentRecipientSignedEmailTemplate = ({
 
   const recipientReference = recipientName || recipientEmail;
 
-  const previewText = msg`${recipientReference} has signed ${documentName}`;
+  const previewText = msg`${recipientReference} has signed a document`;
 
   return (
     <Html>
@@ -37,7 +36,7 @@ export const DocumentRecipientSignedEmailTemplate = ({
               <TemplateBrandingLogo assetBaseUrl={assetBaseUrl} className="mb-4 h-6" />
 
               <TemplateDocumentRecipientSigned
-                documentName={documentName}
+                documentName=""
                 recipientName={recipientName}
                 recipientEmail={recipientEmail}
                 assetBaseUrl={assetBaseUrl}

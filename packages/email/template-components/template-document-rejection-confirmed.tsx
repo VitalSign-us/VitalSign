@@ -10,8 +10,6 @@ interface TemplateDocumentRejectionConfirmedProps {
 }
 
 export function TemplateDocumentRejectionConfirmed({
-  recipientName,
-  documentName,
   documentOwnerName,
   reason,
 }: TemplateDocumentRejectionConfirmedProps) {
@@ -23,10 +21,7 @@ export function TemplateDocumentRejectionConfirmed({
         </Heading>
 
         <Text className="text-base text-foreground">
-          <Trans>
-            This email confirms that you have rejected the document{' '}
-            <strong className="font-bold">"{documentName}"</strong> sent by {documentOwnerName}.
-          </Trans>
+          <Trans>This email confirms that you have rejected the document sent by {documentOwnerName}.</Trans>
         </Text>
 
         {reason && (

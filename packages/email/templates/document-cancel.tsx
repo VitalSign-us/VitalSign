@@ -12,13 +12,12 @@ export type DocumentCancelEmailTemplateProps = Partial<TemplateDocumentCancelPro
 export const DocumentCancelTemplate = ({
   inviterName = 'Lucas Smith',
   inviterEmail = 'lucas@documenso.com',
-  documentName = 'Open Source Pledge.pdf',
   assetBaseUrl = 'http://localhost:3002',
   cancellationReason,
 }: DocumentCancelEmailTemplateProps) => {
   const { _ } = useLingui();
 
-  const previewText = msg`${inviterName} has cancelled the document ${documentName}, you don't need to sign it anymore.`;
+  const previewText = msg`${inviterName} has cancelled a document. You don't need to sign it anymore.`;
 
   return (
     <Html>
@@ -35,7 +34,7 @@ export const DocumentCancelTemplate = ({
               <TemplateDocumentCancel
                 inviterName={inviterName}
                 inviterEmail={inviterEmail}
-                documentName={documentName}
+                documentName=""
                 assetBaseUrl={assetBaseUrl}
                 cancellationReason={cancellationReason}
               />

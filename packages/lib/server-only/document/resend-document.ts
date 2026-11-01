@@ -5,7 +5,6 @@ import { AppError } from '@documenso/lib/errors/app-error';
 import { DOCUMENT_AUDIT_LOG_TYPE } from '@documenso/lib/types/document-audit-logs';
 import type { ApiRequestMetadata } from '@documenso/lib/universal/extract-request-metadata';
 import { createDocumentAuditLogData } from '@documenso/lib/utils/document-audit-logs';
-import { renderCustomEmailTemplate } from '@documenso/lib/utils/render-custom-email-template';
 import { prisma } from '@documenso/prisma';
 import { msg } from '@lingui/core/macro';
 import {
@@ -221,42 +220,21 @@ export const resendDocument = async ({ id, userId, recipients, teamId, requestMe
 
       const recipientActionVerb = i18n._(RECIPIENT_ROLES_DESCRIPTION[recipient.role].actionVerb).toLowerCase();
 
-      let emailMessage = envelope.documentMeta.message || '';
       let emailSubject = i18n._(msg`Reminder: Please ${recipientActionVerb} this document`);
 
       if (selfSigner) {
-        emailMessage = i18n._(
-          msg`You have initiated the document ${`"${envelope.title}"`} that requires you to ${recipientActionVerb} it.`,
-        );
         emailSubject = i18n._(msg`Reminder: Please ${recipientActionVerb} your document`);
       }
 
       if (organisationType === OrganisationType.ORGANISATION) {
         emailSubject = i18n._(msg`Reminder: ${envelope.team.name} invited you to ${recipientActionVerb} a document`);
-
-        if (!emailMessage) {
-          const inviterName = user.name || user.email;
-
-          emailMessage = i18n._(
-            settings.includeSenderDetails
-              ? msg`${inviterName} on behalf of "${envelope.team.name}" has invited you to ${recipientActionVerb} the document "${envelope.title}".`
-              : msg`${envelope.team.name} has invited you to ${recipientActionVerb} the document "${envelope.title}".`,
-          );
-        }
       }
-
-      const customEmailTemplate = {
-        'signer.name': name,
-        'signer.email': email,
-        'document.name': envelope.title,
-      };
 
       const assetBaseUrl = NEXT_PUBLIC_WEBAPP_URL() || 'http://localhost:3000';
       const signDocumentLink = `${NEXT_PUBLIC_WEBAPP_URL()}/sign/${recipient.token}`;
       const reportUrl = `${NEXT_PUBLIC_WEBAPP_URL()}/report/${recipient.token}`;
 
       const template = createElement(DocumentInviteEmailTemplate, {
-        documentName: envelope.title,
         inviterName: user.name || undefined,
         inviterEmail:
           organisationType === OrganisationType.ORGANISATION
@@ -264,7 +242,6 @@ export const resendDocument = async ({ id, userId, recipients, teamId, requestMe
             : user.email,
         assetBaseUrl,
         signDocumentLink,
-        customBody: renderCustomEmailTemplate(emailMessage, customEmailTemplate),
         role: recipient.role,
         selfSigner,
         organisationType,
@@ -295,9 +272,7 @@ export const resendDocument = async ({ id, userId, recipients, teamId, requestMe
         },
         from: senderEmail,
         replyTo: replyToEmail,
-        subject: envelope.documentMeta.subject
-          ? renderCustomEmailTemplate(i18n._(msg`Reminder: ${envelope.documentMeta.subject}`), customEmailTemplate)
-          : emailSubject,
+        subject: emailSubject,
         html,
         text,
         headers: buildEnvelopeEmailHeaders({
