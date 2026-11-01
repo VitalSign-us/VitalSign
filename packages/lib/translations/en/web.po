@@ -28,18 +28,6 @@ msgstr "\"{0}\" is not a valid email address."
 msgid "\"{0}\" will appear on the document as it has a timezone of \"{1}\"."
 msgstr "\"{0}\" will appear on the document as it has a timezone of \"{1}\"."
 
-#: packages/email/template-components/template-document-super-delete.tsx
-msgid "\"{documentName}\" has been deleted by an admin."
-msgstr "\"{documentName}\" has been deleted by an admin."
-
-#: packages/email/template-components/template-document-pending.tsx
-msgid "“{documentName}” has been signed"
-msgstr "“{documentName}” has been signed"
-
-#: packages/email/template-components/template-document-completed.tsx
-msgid "“{documentName}” was signed by all signers"
-msgstr "“{documentName}” was signed by all signers"
-
 #: apps/remix/app/components/forms/email-preferences-form.tsx
 msgid "\"{placeholderEmail}\" on behalf of \"Team Name\" has invited you to sign \"example document\"."
 msgstr "\"{placeholderEmail}\" on behalf of \"Team Name\" has invited you to sign \"example document\"."
@@ -317,14 +305,6 @@ msgstr "{0} direct signing templates"
 msgid "{0} field"
 msgstr "{0} field"
 
-#. placeholder {0}: envelope.team.name
-#. placeholder {0}: team.name
-#. placeholder {1}: envelope.title
-#: packages/lib/jobs/definitions/emails/send-signing-email.handler.ts
-#: packages/lib/server-only/document/resend-document.ts
-msgid "{0} has invited you to {recipientActionVerb} the document \"{1}\"."
-msgstr "{0} has invited you to {recipientActionVerb} the document \"{1}\"."
-
 #. placeholder {0}: organisation.name
 #: apps/remix/app/components/general/settings-upsell/branding-upsell.tsx
 #: apps/remix/app/components/general/settings-upsell/email-domains-upsell.tsx
@@ -418,51 +398,43 @@ msgstr "{expiresInMinutes, plural, one {This code will expire in # minute.} othe
 msgid "{inviterName} <0>({inviterEmail})</0>"
 msgstr "{inviterName} <0>({inviterEmail})</0>"
 
-#: packages/email/templates/document-cancel.tsx
-msgid "{inviterName} has cancelled the document {documentName}, you don't need to sign it anymore."
-msgstr "{inviterName} has canceled the document {documentName}, you don't need to sign it anymore."
-
 #: packages/email/template-components/template-document-cancel.tsx
-msgid "{inviterName} has cancelled the document<0/>\"{documentName}\""
-msgstr "{inviterName} has canceled the document<0/>\"{documentName}\""
+msgid "{inviterName} has cancelled a document"
+msgstr "{inviterName} has cancelled a document"
+
+#: packages/email/templates/document-cancel.tsx
+msgid "{inviterName} has cancelled a document. You don't need to sign it anymore."
+msgstr "{inviterName} has cancelled a document. You don't need to sign it anymore."
 
 #. placeholder {0}: _(actionVerb).toLowerCase()
 #: packages/email/template-components/template-document-invite.tsx
-msgid "{inviterName} has invited you to {0}<0/>\"{documentName}\""
-msgstr "{inviterName} has invited you to {0}<0/>\"{documentName}\""
+msgid "{inviterName} has invited you to {0} a document"
+msgstr "{inviterName} has invited you to {0} a document"
 
 #: packages/email/templates/document-invite.tsx
-msgid "{inviterName} has invited you to {action} {documentName}"
-msgstr "{inviterName} has invited you to {action} {documentName}"
+msgid "{inviterName} has invited you to {action} a document"
+msgstr "{inviterName} has invited you to {action} a document"
 
 #: packages/email/templates/document-invite.tsx
-msgid "{inviterName} has invited you to {action} the document \"{documentName}\"."
-msgstr "{inviterName} has invited you to {action} the document \"{documentName}\"."
+msgid "{inviterName} has invited you to {action} a document."
+msgstr "{inviterName} has invited you to {action} a document."
 
 #: packages/email/templates/recipient-removed-from-document.tsx
-msgid "{inviterName} has removed you from the document {documentName}."
-msgstr "{inviterName} has removed you from the document {documentName}."
+msgid "{inviterName} has removed you from a document"
+msgstr "{inviterName} has removed you from a document"
 
 #: packages/email/templates/recipient-removed-from-document.tsx
-msgid "{inviterName} has removed you from the document<0/>\"{documentName}\""
-msgstr "{inviterName} has removed you from the document<0/>\"{documentName}\""
-
-#. placeholder {0}: envelope.team.name
-#. placeholder {0}: team.name
-#. placeholder {1}: envelope.title
-#: packages/lib/jobs/definitions/emails/send-signing-email.handler.ts
-#: packages/lib/server-only/document/resend-document.ts
-msgid "{inviterName} on behalf of \"{0}\" has invited you to {recipientActionVerb} the document \"{1}\"."
-msgstr "{inviterName} on behalf of \"{0}\" has invited you to {recipientActionVerb} the document \"{1}\"."
+msgid "{inviterName} has removed you from a document."
+msgstr "{inviterName} has removed you from a document."
 
 #. placeholder {0}: _(actionVerb).toLowerCase()
 #: packages/email/template-components/template-document-invite.tsx
-msgid "{inviterName} on behalf of \"{teamName}\" has invited you to {0}<0/>\"{documentName}\""
-msgstr "{inviterName} on behalf of \"{teamName}\" has invited you to {0}<0/>\"{documentName}\""
+msgid "{inviterName} on behalf of \"{teamName}\" has invited you to {0} a document"
+msgstr "{inviterName} on behalf of \"{teamName}\" has invited you to {0} a document"
 
 #: packages/email/templates/document-invite.tsx
-msgid "{inviterName} on behalf of \"{teamName}\" has invited you to {action} {documentName}"
-msgstr "{inviterName} on behalf of \"{teamName}\" has invited you to {action} {documentName}"
+msgid "{inviterName} on behalf of \"{teamName}\" has invited you to {action} a document"
+msgstr "{inviterName} on behalf of \"{teamName}\" has invited you to {action} a document"
 
 #: apps/remix/app/components/dialogs/envelopes-bulk-download-dialog.tsx
 msgid "{MAX_BULK_DOWNLOAD_ENVELOPES, plural, one {You can download up to # document at a time. Deselect some documents to continue.} other {You can download up to # documents at a time. Deselect some documents to continue.}}"
@@ -497,37 +469,30 @@ msgid "{recipientCount} recipients"
 msgstr "{recipientCount} recipients"
 
 #: packages/email/template-components/template-recipient-removed-by-admin.tsx
-msgid "{recipientLabel} has been removed from the document \"{documentName}\" by an administrator, typically at the request of the document sender."
-msgstr "{recipientLabel} has been removed from the document \"{documentName}\" by an administrator, typically at the request of the document sender."
+msgid "{recipientLabel} has been removed from a document by an administrator, typically at the request of the document sender."
+msgstr "{recipientLabel} has been removed from a document by an administrator, typically at the request of the document sender."
 
 #: packages/email/templates/document-created-from-direct-template.tsx
 msgid "{recipientName} {action} a document by using one of your direct links"
 msgstr "{recipientName} {action} a document by using one of your direct links"
 
 #: packages/email/templates/recipient-removed-by-admin.tsx
-msgid "{recipientName} has been removed from the document \"{documentName}\" by an administrator."
-msgstr "{recipientName} has been removed from the document \"{documentName}\" by an administrator."
+msgid "{recipientName} has been removed from a document by an administrator."
+msgstr "{recipientName} has been removed from a document by an administrator."
 
 #: packages/email/templates/document-rejected.tsx
-msgid "{recipientName} has rejected the document '{documentName}'"
-msgstr "{recipientName} has rejected the document '{documentName}'"
+msgid "{recipientName} has rejected a document"
+msgstr "{recipientName} has rejected a document"
 
 #: packages/email/template-components/template-document-recipient-signed.tsx
 msgid "{recipientReference} has completed signing the document."
 msgstr "{recipientReference} has completed signing the document."
 
-#. placeholder {0}: envelope.title
-#: packages/lib/jobs/definitions/emails/send-recipient-signed-email.handler.ts
-msgid "{recipientReference} has signed \"{0}\""
-msgstr "{recipientReference} has signed \"{0}\""
-
 #: packages/email/template-components/template-document-recipient-signed.tsx
-msgid "{recipientReference} has signed \"{documentName}\""
-msgstr "{recipientReference} has signed \"{documentName}\""
-
 #: packages/email/templates/document-recipient-signed.tsx
-msgid "{recipientReference} has signed {documentName}"
-msgstr "{recipientReference} has signed {documentName}"
+#: packages/lib/jobs/definitions/emails/send-recipient-signed-email.handler.ts
+msgid "{recipientReference} has signed a document"
+msgstr "{recipientReference} has signed a document"
 
 #: apps/remix/app/components/dialogs/public-profile-template-manage-dialog.tsx
 #: apps/remix/app/components/forms/public-profile-form.tsx
@@ -543,8 +508,8 @@ msgid "{selectedCount} selected"
 msgstr "{selectedCount} selected"
 
 #: packages/email/template-components/template-document-rejected.tsx
-msgid "{signerName} has rejected the document \"{documentName}\"."
-msgstr "{signerName} has rejected the document \"{documentName}\"."
+msgid "{signerName} has rejected a document."
+msgstr "{signerName} has rejected a document."
 
 #: apps/remix/app/components/dialogs/email-transport-delete-dialog.tsx
 msgid "{subscriptionClaimCount, plural, one {# Subscription claim} other {# Subscription claims}}"
@@ -552,12 +517,12 @@ msgstr "{subscriptionClaimCount, plural, one {# Subscription claim} other {# Sub
 
 #. placeholder {0}: _(actionVerb).toLowerCase()
 #: packages/email/template-components/template-document-invite.tsx
-msgid "{teamName} has invited you to {0}<0/>\"{documentName}\""
-msgstr "{teamName} has invited you to {0}<0/>\"{documentName}\""
+msgid "{teamName} has invited you to {0} a document"
+msgstr "{teamName} has invited you to {0} a document"
 
 #: packages/email/templates/document-invite.tsx
-msgid "{teamName} has invited you to {action} {documentName}"
-msgstr "{teamName} has invited you to {action} {documentName}"
+msgid "{teamName} has invited you to {action} a document"
+msgstr "{teamName} has invited you to {action} a document"
 
 #: apps/remix/app/components/general/app-command-menu.tsx
 msgid "{totalVisibleCount, plural, one {# item} other {# items}}"
@@ -1068,9 +1033,17 @@ msgstr "A confirmation email has been sent, and it should arrive in your inbox s
 msgid "A device capable of accessing, opening, and reading documents"
 msgstr "A device capable of accessing, opening, and reading documents"
 
-#: packages/lib/jobs/definitions/emails/send-signing-email.handler.ts
-msgid "A document was created by your direct template that requires you to {recipientActionVerb} it."
-msgstr "A document was created by your direct template that requires you to {recipientActionVerb} it."
+#: packages/email/template-components/template-document-super-delete.tsx
+msgid "A document has been deleted by an admin."
+msgstr "A document has been deleted by an admin."
+
+#: packages/email/template-components/template-document-pending.tsx
+msgid "A document has been signed"
+msgstr "A document has been signed"
+
+#: packages/email/template-components/template-document-completed.tsx
+msgid "A document was signed by all signers"
+msgstr "A document was signed by all signers"
 
 #: apps/remix/app/components/dialogs/template-use-dialog.tsx
 msgid "A draft document will be created"
@@ -1825,8 +1798,8 @@ msgid "An account was automatically disabled"
 msgstr "An account was automatically disabled"
 
 #: packages/email/templates/document-super-delete.tsx
-msgid "An admin has deleted your document \"{documentName}\"."
-msgstr "An admin has deleted your document \"{documentName}\"."
+msgid "An admin has deleted your document."
+msgstr "An admin has deleted your document."
 
 #: packages/email/template-components/template-admin-user-created.tsx
 msgid "An administrator has created a Documenso account for you."
@@ -2660,14 +2633,13 @@ msgstr "Bulk Copy"
 msgid "Bulk Import"
 msgstr "Bulk Import"
 
-#. placeholder {0}: template.title
 #: packages/lib/jobs/definitions/internal/bulk-send-template.handler.ts
-msgid "Bulk Send Complete: {0}"
-msgstr "Bulk Send Complete: {0}"
+msgid "Bulk send complete"
+msgstr "Bulk send complete"
 
 #: packages/email/templates/bulk-send-complete.tsx
-msgid "Bulk send operation complete for template \"{templateName}\""
-msgstr "Bulk send operation complete for template \"{templateName}\""
+msgid "Bulk send operation complete"
+msgstr "Bulk send operation complete"
 
 #: apps/remix/app/components/dialogs/template-bulk-send-dialog.tsx
 msgid "Bulk Send Template via CSV"
@@ -4525,22 +4497,6 @@ msgstr "Documenso will delete <0>all of your documents</0>, along with all of yo
 msgid "Document"
 msgstr "Document"
 
-#. placeholder {0}: envelope.title
-#. placeholder {1}: recipient.name
-#: packages/lib/jobs/definitions/emails/send-rejection-emails.handler.ts
-msgid "Document \"{0}\" - Rejected by {1}"
-msgstr "Document \"{0}\" - Rejected by {1}"
-
-#. placeholder {0}: envelope.title
-#: packages/lib/jobs/definitions/emails/send-rejection-emails.handler.ts
-msgid "Document \"{0}\" - Rejection Confirmed"
-msgstr "Document \"{0}\" - Rejection Confirmed"
-
-#. placeholder {0}: envelope.title
-#: packages/lib/jobs/definitions/emails/send-document-cancelled-emails.handler.ts
-msgid "Document \"{0}\" Cancelled"
-msgstr "Document \"{0}\" Canceled"
-
 #: packages/ui/primitives/document-upload-button.tsx
 msgid "Document (Legacy)"
 msgstr "Document (Legacy)"
@@ -4580,6 +4536,7 @@ msgstr "Document Approved"
 #: apps/remix/app/components/dialogs/envelope-cancel-dialog.tsx
 #: apps/remix/app/components/general/document/document-status.tsx
 #: apps/remix/app/utils/toast-error-messages.ts
+#: packages/lib/jobs/definitions/emails/send-document-cancelled-emails.handler.ts
 msgid "Document cancelled"
 msgstr "Document canceled"
 
@@ -4815,6 +4772,15 @@ msgstr "Document rejected"
 #: packages/email/template-components/template-document-rejected.tsx
 msgid "Document Rejected"
 msgstr "Document Rejected"
+
+#. placeholder {0}: recipient.name
+#: packages/lib/jobs/definitions/emails/send-rejection-emails.handler.ts
+msgid "Document rejected by {0}"
+msgstr "Document rejected by {0}"
+
+#: packages/lib/jobs/definitions/emails/send-rejection-emails.handler.ts
+msgid "Document rejection confirmed"
+msgstr "Document rejection confirmed"
 
 #: apps/remix/app/components/dialogs/envelope-rename-dialog.tsx
 msgid "Document Renamed"
@@ -6705,8 +6671,8 @@ msgid "Hi {userName},"
 msgstr "Hi {userName},"
 
 #: packages/email/template-components/template-access-auth-2fa.tsx
-msgid "Hi {userName}, you need to enter a verification code to complete the document \"{documentTitle}\"."
-msgstr "Hi {userName}, you need to enter a verification code to complete the document \"{documentTitle}\"."
+msgid "Hi {userName}, you need to enter a verification code to complete a document."
+msgstr "Hi {userName}, you need to enter a verification code to complete a document."
 
 #: packages/email/templates/reset-password.tsx
 msgid "Hi, {userName} <0>({userEmail})</0>"
@@ -9040,12 +9006,8 @@ msgstr "Plans without a transport use the system default mailer."
 
 #. placeholder {0}: _(actionVerb).toLowerCase()
 #: packages/email/template-components/template-document-invite.tsx
-msgid "Please {0} your document<0/>\"{documentName}\""
-msgstr "Please {0} your document<0/>\"{documentName}\""
-
-#: packages/email/templates/document-invite.tsx
-msgid "Please {action} your document {documentName}"
-msgstr "Please {action} your document {documentName}"
+msgid "Please {0} your document"
+msgstr "Please {0} your document"
 
 #: packages/lib/jobs/definitions/emails/send-signing-email.handler.ts
 msgid "Please {recipientActionVerb} this document"
@@ -9845,16 +9807,6 @@ msgstr "Remembered your password? <0>Sign In</0>"
 msgid "Reminder preferences updated"
 msgstr "Reminder preferences updated"
 
-#: packages/email/templates/document-reminder.tsx
-msgid "Reminder to {action} {documentName}"
-msgstr "Reminder to {action} {documentName}"
-
-#. placeholder {0}: envelope.documentMeta.subject
-#: packages/lib/jobs/definitions/internal/process-signing-reminder.handler.ts
-#: packages/lib/server-only/document/resend-document.ts
-msgid "Reminder: {0}"
-msgstr "Reminder: {0}"
-
 #. placeholder {0}: envelope.team.name
 #: packages/lib/jobs/definitions/internal/process-signing-reminder.handler.ts
 #: packages/lib/server-only/document/resend-document.ts
@@ -9863,13 +9815,12 @@ msgstr "Reminder: {0} invited you to {recipientActionVerb} a document"
 
 #. placeholder {0}: _(actionVerb).toLowerCase()
 #: packages/email/template-components/template-document-reminder.tsx
-msgid "Reminder: Please {0} your document<0/>\"{documentName}\""
-msgstr "Reminder: Please {0} your document<0/>\"{documentName}\""
+msgid "Reminder: Please {0} your document"
+msgstr "Reminder: Please {0} your document"
 
-#. placeholder {0}: envelope.title
 #: packages/lib/jobs/definitions/internal/process-signing-reminder.handler.ts
-msgid "Reminder: Please {recipientActionVerb} the document \"{0}\""
-msgstr "Reminder: Please {recipientActionVerb} the document \"{0}\""
+msgid "Reminder: Please {recipientActionVerb} a document"
+msgstr "Reminder: Please {recipientActionVerb} a document"
 
 #: packages/lib/server-only/document/resend-document.ts
 msgid "Reminder: Please {recipientActionVerb} this document"
@@ -9878,6 +9829,10 @@ msgstr "Reminder: Please {recipientActionVerb} this document"
 #: packages/lib/server-only/document/resend-document.ts
 msgid "Reminder: Please {recipientActionVerb} your document"
 msgstr "Reminder: Please {recipientActionVerb} your document"
+
+#: packages/email/templates/document-reminder.tsx
+msgid "Reminder: you have a document to {action}"
+msgstr "Reminder: you have a document to {action}"
 
 #: apps/remix/app/components/general/envelope-editor/envelope-editor-settings-dialog.tsx
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.reminders.tsx
@@ -11261,14 +11216,13 @@ msgid "Signing Window Expired"
 msgstr "Signing Window Expired"
 
 #. placeholder {0}: recipient.name || recipient.email
-#. placeholder {1}: envelope.title
 #: packages/lib/jobs/definitions/emails/send-owner-recipient-expired-email.handler.ts
-msgid "Signing window expired for \"{0}\" on \"{1}\""
-msgstr "Signing window expired for \"{0}\" on \"{1}\""
+msgid "Signing window expired for \"{0}\""
+msgstr "Signing window expired for \"{0}\""
 
 #: packages/email/template-components/template-recipient-expired.tsx
-msgid "Signing window expired for \"{displayName}\" on \"{documentName}\""
-msgstr "Signing window expired for \"{displayName}\" on \"{documentName}\""
+msgid "Signing window expired for \"{displayName}\""
+msgstr "Signing window expired for \"{displayName}\""
 
 #. placeholder {0}: data.recipientName || data.recipientEmail
 #: packages/lib/utils/document-audit-logs.ts
@@ -12530,12 +12484,12 @@ msgid "The signing provider did not respond in time. Please retry."
 msgstr "The signing provider did not respond in time. Please retry."
 
 #: packages/email/templates/recipient-expired.tsx
-msgid "The signing window for \"{recipientName}\" on document \"{documentName}\" has expired."
-msgstr "The signing window for \"{recipientName}\" on document \"{documentName}\" has expired."
+msgid "The signing window for \"{recipientName}\" has expired."
+msgstr "The signing window for \"{recipientName}\" has expired."
 
 #: packages/email/template-components/template-recipient-expired.tsx
-msgid "The signing window for {displayName} on document \"{documentName}\" has expired. You can resend the document to extend their deadline or cancel the document."
-msgstr "The signing window for {displayName} on document \"{documentName}\" has expired. You can resend the document to extend their deadline or cancel the document."
+msgid "The signing window for {displayName} has expired. You can resend the document to extend their deadline or cancel the document."
+msgstr "The signing window for {displayName} has expired. You can resend the document to extend their deadline or cancel the document."
 
 #: apps/remix/app/components/general/admin-site-banner-section.tsx
 msgid "The site banner is a message that is shown at the top of the site. It can be used to display important information to your users."
@@ -12862,8 +12816,8 @@ msgid "This document will be duplicated."
 msgstr "This document will be duplicated."
 
 #: packages/email/template-components/template-document-rejection-confirmed.tsx
-msgid "This email confirms that you have rejected the document <0>\"{documentName}\"</0> sent by {documentOwnerName}."
-msgstr "This email confirms that you have rejected the document <0>\"{documentName}\"</0> sent by {documentOwnerName}."
+msgid "This email confirms that you have rejected the document sent by {documentOwnerName}."
+msgstr "This email confirms that you have rejected the document sent by {documentOwnerName}."
 
 #: apps/remix/app/routes/_unauthenticated+/team.verify.email.$token.tsx
 msgid "This email is already being used as a team email. Please contact your team for assistance."
@@ -15351,6 +15305,14 @@ msgstr "You don't need to sign it anymore."
 msgid "You failed to validate a 2FA token for the document"
 msgstr "You failed to validate a 2FA token for the document"
 
+#: packages/email/templates/document-invite.tsx
+msgid "You have a document to {action}"
+msgstr "You have a document to {action}"
+
+#: packages/email/templates/document-invite.tsx
+msgid "You have a document to {action}."
+msgstr "You have a document to {action}."
+
 #: apps/remix/app/routes/_unauthenticated+/organisation.invite.$token.tsx
 msgid "You have accepted an invitation from <0>{organisationName}</0> to join their organisation."
 msgstr "You have accepted an invitation from <0>{organisationName}</0> to join their organization."
@@ -15384,12 +15346,12 @@ msgid "You have been removed from a document"
 msgstr "You have been removed from a document"
 
 #: packages/email/template-components/template-recipient-removed-by-admin.tsx
-msgid "You have been removed from the document \"{documentName}\" by an administrator, typically at the request of the document sender."
-msgstr "You have been removed from the document \"{documentName}\" by an administrator, typically at the request of the document sender."
+msgid "You have been removed from a document by an administrator, typically at the request of the document sender."
+msgstr "You have been removed from a document by an administrator, typically at the request of the document sender."
 
 #: packages/email/templates/recipient-removed-by-admin.tsx
-msgid "You have been removed from the document \"{documentName}\" by an administrator."
-msgstr "You have been removed from the document \"{documentName}\" by an administrator."
+msgid "You have been removed from a document by an administrator."
+msgstr "You have been removed from a document by an administrator."
 
 #: apps/remix/app/components/embed/multisign/multi-sign-document-list.tsx
 msgid "You have been requested to sign the following documents. Review each document carefully and complete the signing process."
@@ -15398,12 +15360,6 @@ msgstr "You have been requested to sign the following documents. Review each doc
 #: apps/remix/app/routes/_unauthenticated+/organisation.invite.$token.tsx
 msgid "You have declined the invitation from <0>{organisationName}</0> to join their organisation."
 msgstr "You have declined the invitation from <0>{organisationName}</0> to join their organization."
-
-#. placeholder {0}: `"${envelope.title}"`
-#: packages/lib/jobs/definitions/emails/send-signing-email.handler.ts
-#: packages/lib/server-only/document/resend-document.ts
-msgid "You have initiated the document {0} that requires you to {recipientActionVerb} it."
-msgstr "You have initiated the document {0} that requires you to {recipientActionVerb} it."
 
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/settings.tokens.tsx
 msgid "You have no API tokens yet. Your tokens will be shown here once you create them."
@@ -15453,8 +15409,8 @@ msgid "You have reached your document limit. <0>Upgrade your account to continue
 msgstr "You have reached your document limit. <0>Upgrade your account to continue!</0>"
 
 #: packages/email/templates/document-rejection-confirmed.tsx
-msgid "You have rejected the document '{documentName}'"
-msgstr "You have rejected the document '{documentName}'"
+msgid "You have rejected a document"
+msgstr "You have rejected a document"
 
 #: apps/remix/app/components/embed/embed-document-rejected.tsx
 #: apps/remix/app/routes/_recipient+/sign.$token+/rejected.tsx
@@ -15462,8 +15418,8 @@ msgid "You have rejected this document"
 msgstr "You have rejected this document"
 
 #: packages/email/template-components/template-document-self-signed.tsx
-msgid "You have signed “{documentName}”"
-msgstr "You have signed “{documentName}”"
+msgid "You have signed a document"
+msgstr "You have signed a document"
 
 #: apps/remix/app/components/dialogs/organisation-leave-dialog.tsx
 msgid "You have successfully left this organisation."
@@ -15874,8 +15830,8 @@ msgid "Your bulk send has been initiated. You will receive an email notification
 msgstr "Your bulk send has been initiated. You will receive an email notification upon completion."
 
 #: packages/email/templates/bulk-send-complete.tsx
-msgid "Your bulk send operation for template \"{templateName}\" has completed."
-msgstr "Your bulk send operation for template \"{templateName}\" has completed."
+msgid "Your bulk send operation has completed."
+msgstr "Your bulk send operation has completed."
 
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.certificates.tsx
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/settings.certificates.tsx
